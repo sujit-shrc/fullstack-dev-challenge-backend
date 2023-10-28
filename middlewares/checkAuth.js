@@ -7,7 +7,7 @@ const checkAuth = async (req, res, next) => {
     if (!sessionid) {
       return res.status(401).json({ message: 'Auth failed! Please try to Login' });
     }
-    const sql = 'SELECT role.role AS user_role, sessions.userid AS sessionid FROM role JOIN special_table ON role.roleid = special_table.roleid JOIN sessions ON special_table.userid = sessions.userid WHERE sessions.sessionid = ?'
+    const sql = 'SELECT roles.role AS user_role, sessions.userid AS sessionid FROM roles JOIN special_table ON roles.roleid = special_table.roleid JOIN sessions ON special_table.userid = sessions.userid WHERE sessions.sessionid = ?'
     const [rows, fields] = await poll.query(sql, sessionid);
     if (rows.length > 0 && rows[0].user_role === 'Admin') {
       next();
