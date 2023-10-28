@@ -1,5 +1,6 @@
 import express from 'express';
 import getStudents from './controller/studentController.js';
+import checkAuth from './middlewares/checkAuth.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -11,7 +12,7 @@ app.get('/', (req, res) => {
   res.status(200).json({"message":"App is live!!"});
 });
 
-app.get('/students', getStudents);
+app.get('/students',checkAuth, getStudents);
 
 
 export default app;
