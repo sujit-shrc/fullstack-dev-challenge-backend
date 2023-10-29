@@ -4,7 +4,6 @@ import randomstring from 'randomstring';
 const login = async (req, res) => {
     // checking if session exist on request
     const sessionid = req.headers.authorization?.split(' ')[1] || '';
-    console.log("sessionid is: " + sessionid)
     try {
       if (sessionid && sessionid !== 'null' && sessionid !== 'undefined') {
         const sql = 'SELECT * FROM sessions WHERE sessionid = ?';
